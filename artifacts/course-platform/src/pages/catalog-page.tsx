@@ -9,33 +9,34 @@ export function CatalogPage() {
   const { data: courses, isLoading } = useGetCourses();
   const [search, setSearch] = useState("");
 
-  const filteredCourses = courses?.filter(c => 
-    c.title.toLowerCase().includes(search.toLowerCase()) || 
+  const filteredCourses = courses?.filter(c =>
+    c.title.toLowerCase().includes(search.toLowerCase()) ||
     c.description.toLowerCase().includes(search.toLowerCase())
   ) || [];
 
   return (
     <div className="space-y-8 pb-12">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="space-y-2"
         >
-          <h1 className="text-4xl md:text-5xl font-display font-bold">Explore Courses</h1>
+          <h1 className="text-4xl md:text-5xl font-display font-bold">Explorar Cursos</h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Discover premium content created by experts. Upgrade your skills today.
+            Descubra conteúdos criados por especialistas. Desenvolva suas habilidades hoje.
           </p>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           className="relative w-full md:w-72"
         >
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-          <Input 
-            placeholder="Search courses..." 
+          <Input
+            placeholder="Buscar cursos..."
+            data-testid="input-search"
             className="pl-10 h-12 bg-card border-border/50 rounded-xl focus:border-primary/50"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -58,8 +59,8 @@ export function CatalogPage() {
           <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Search className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h3 className="text-xl font-semibold mb-2">No courses found</h3>
-          <p className="text-muted-foreground">Try adjusting your search query.</p>
+          <h3 className="text-xl font-semibold mb-2">Nenhum curso encontrado</h3>
+          <p className="text-muted-foreground">Tente ajustar sua busca.</p>
         </div>
       )}
     </div>
