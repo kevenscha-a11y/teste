@@ -1,4 +1,4 @@
-# EduPlay - Plataforma de Cursos Online
+# Unesc Labs - Plataforma de Cursos Online
 
 ## Overview
 

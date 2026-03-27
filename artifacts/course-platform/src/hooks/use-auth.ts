@@ -60,7 +60,7 @@ export function useAuth() {
         queryClient.setQueryData(getGetMeQueryKey(), data.user);
         toast({
           title: "Account created!",
-          description: "Welcome to EduPlay.",
+          description: "Bem-vindo ao Unesc Labs.",
         });
       },
       onError: (err: any) => {

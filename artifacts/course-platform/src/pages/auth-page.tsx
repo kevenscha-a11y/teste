@@ -57,7 +57,7 @@ export function AuthPage() {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center mb-4 shadow-xl shadow-primary/20">
             <GraduationCap className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-display font-bold text-foreground">EduPlay</h1>
+          <h1 className="text-4xl font-display font-bold text-foreground">Unesc Labs</h1>
           <p className="text-muted-foreground mt-2">Desbloqueie seu potencial hoje.</p>
         </div>
 

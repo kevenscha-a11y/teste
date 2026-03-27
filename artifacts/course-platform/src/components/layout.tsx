@@ -74,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
-            <span className="font-display font-bold text-xl tracking-tight text-gradient">EduPlay</span>
+            <span className="font-display font-bold text-xl tracking-tight text-gradient">Unesc Labs</span>
           </div>
           <ThemeToggle />
         </div>
@@ -110,7 +110,7 @@ export function Layout({ children }: LayoutProps) {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
             <GraduationCap className="w-5 h-5 text-white" />
           </div>
-          <span className="font-display font-bold text-lg tracking-tight text-gradient">EduPlay</span>
+          <span className="font-display font-bold text-lg tracking-tight text-gradient">Unesc Labs</span>
         </div>
         <div className="flex items-center gap-1">
           <ThemeToggle />
@@ -125,7 +125,7 @@ export function Layout({ children }: LayoutProps) {
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
                   <GraduationCap className="w-5 h-5 text-white" />
                 </div>
-                <span className="font-display font-bold text-xl tracking-tight text-gradient">EduPlay</span>
+                <span className="font-display font-bold text-xl tracking-tight text-gradient">Unesc Labs</span>
               </div>
               <nav className="flex-1">
                 <NavLinks />

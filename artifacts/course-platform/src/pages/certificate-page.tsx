@@ -112,7 +112,7 @@ export function CertificatePage() {
 
               <div className="text-center">
                 <div className="border-b border-slate-400 pb-1 px-8 mb-2 font-display font-bold text-xl text-[#1e3a8a]">
-                  EduPlay
+                  Unesc Labs
                 </div>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Plataforma</p>
               </div>
