@@ -30,5 +30,7 @@ export * from "./successResponse";
 export * from "./updateCourseRequest";
 export * from "./updateLessonRequest";
 export * from "./updateSectionRequest";
+export * from "./uploadUrlRequest";
+export * from "./uploadUrlResponse";
 export * from "./user";
 export * from "./userRole";

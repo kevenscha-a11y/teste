@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useParams, Link } from "wouter";
 import {
   useGetCourse,
@@ -14,7 +14,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  Loader2, ChevronLeft, Plus, GripVertical, Settings, Trash2, Pencil, PlayCircle, BookOpen
+  Loader2, ChevronLeft, Plus, GripVertical, Settings, Trash2, Pencil, PlayCircle, BookOpen, Upload, Link as LinkIcon, CheckCircle2, X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +29,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useUpload } from "@workspace/object-storage-web";
 
 const courseSchema = z.object({
   title: z.string().min(3),
@@ -70,6 +71,21 @@ export function AdminCourseEdit() {
 
   const [sectionDialog, setSectionDialog] = useState({ open: false, mode: 'create', id: 0 });
   const [lessonDialog, setLessonDialog] = useState({ open: false, mode: 'create', id: 0, sectionId: 0 });
+  const [videoInputMode, setVideoInputMode] = useState<'url' | 'file'>('url');
+  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { uploadFile, isUploading, progress } = useUpload({
+    onSuccess: (response) => {
+      const servingUrl = `/api/storage${response.objectPath}`;
+      lessonForm.setValue("videoUrl", servingUrl);
+      setUploadedFileName(response.metadata.name);
+      toast({ title: "Vídeo enviado com sucesso!" });
+    },
+    onError: (err) => {
+      toast({ variant: "destructive", title: "Erro no upload", description: err.message });
+    },
+  });
 
   const courseForm = useForm<z.infer<typeof courseSchema>>({ resolver: zodResolver(courseSchema) });
   const sectionForm = useForm<z.infer<typeof sectionSchema>>({ resolver: zodResolver(sectionSchema) });
@@ -126,6 +142,8 @@ export function AdminCourseEdit() {
 
   const openCreateLesson = (sectionId: number, currentLessonsCount: number) => {
     lessonForm.reset({ title: "", description: "", videoUrl: "", duration: 0, orderIndex: currentLessonsCount * 10 });
+    setVideoInputMode('url');
+    setUploadedFileName(null);
     setLessonDialog({ open: true, mode: 'create', id: 0, sectionId });
   };
 
@@ -137,6 +155,9 @@ export function AdminCourseEdit() {
       duration: lesson.duration || 0,
       orderIndex: lesson.orderIndex
     });
+    const isStorageUrl = lesson.videoUrl?.includes('/api/storage/');
+    setVideoInputMode(isStorageUrl ? 'file' : 'url');
+    setUploadedFileName(isStorageUrl ? lesson.title : null);
     setLessonDialog({ open: true, mode: 'edit', id: lesson.id, sectionId });
   };
 

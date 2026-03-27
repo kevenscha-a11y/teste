@@ -381,3 +381,31 @@ export const GetCertificateResponse = zod.object({
   completedAt: zod.string(),
   courseId: zod.number(),
 });
+
+/**
+ * @summary Request a presigned URL for file upload
+ */
+export const RequestUploadUrlBody = zod.object({
+  name: zod.string(),
+  size: zod.number(),
+  contentType: zod.string(),
+});
+
+export const RequestUploadUrlResponse = zod.object({
+  uploadURL: zod.string(),
+  objectPath: zod.string(),
+  metadata: zod
+    .object({
+      name: zod.string(),
+      size: zod.number(),
+      contentType: zod.string(),
+    })
+    .optional(),
+});
+
+/**
+ * @summary Serve an uploaded object
+ */
+export const GetStorageObjectParams = zod.object({
+  objectPath: zod.coerce.string(),
+});
