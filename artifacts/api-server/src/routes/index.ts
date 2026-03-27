@@ -6,6 +6,7 @@ import sectionsRouter from "./sections";
 import lessonsRouter from "./lessons";
 import enrollmentsRouter from "./enrollments";
 import progressRouter from "./progress";
+import adminUsersRouter from "./admin-users";
 
 const router: IRouter = Router();
 
@@ -16,5 +17,6 @@ router.use(sectionsRouter);
 router.use(lessonsRouter);
 router.use(enrollmentsRouter);
 router.use(progressRouter);
+router.use(adminUsersRouter);
 
 export default router;

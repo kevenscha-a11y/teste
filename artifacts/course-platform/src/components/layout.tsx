@@ -7,12 +7,14 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
-  GraduationCap
+  GraduationCap,
+  Users,
 } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "./theme-toggle";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -27,6 +29,7 @@ export function Layout({ children }: LayoutProps) {
     { label: "Catálogo", href: "/", icon: Library, show: true },
     { label: "Meus Cursos", href: "/my-courses", icon: BookOpen, show: !!user && !isAdmin },
     { label: "Painel Admin", href: "/admin", icon: LayoutDashboard, show: isAdmin },
+    { label: "Usuários", href: "/admin/users", icon: Users, show: isAdmin },
   ];
 
   const roleLabel = isAdmin ? "administrador" : "estudante";
@@ -36,18 +39,18 @@ export function Layout({ children }: LayoutProps) {
   };
 
   const NavLinks = () => (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-1 w-full">
       {navItems.filter(i => i.show).map((item) => {
         const isActive = location === item.href || (item.href !== "/" && location.startsWith(item.href));
         return (
           <Link key={item.href} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
             <div className={`
-              flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer
+              relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer
               ${isActive
                 ? "bg-primary/10 text-primary font-semibold"
                 : "text-muted-foreground hover:bg-secondary hover:text-foreground"}
             `}>
-              <item.icon className={`w-5 h-5 ${isActive ? "text-primary" : ""}`} />
+              <item.icon className={`w-5 h-5 shrink-0 ${isActive ? "text-primary" : ""}`} />
               <span>{item.label}</span>
               {isActive && (
                 <motion.div
@@ -66,21 +69,24 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Sidebar Desktop */}
       <aside className="hidden md:flex flex-col w-64 border-r border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 h-screen p-4 z-20">
-        <div className="flex items-center gap-3 px-2 py-4 mb-8">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
-            <GraduationCap className="w-5 h-5 text-white" />
+        <div className="flex items-center justify-between px-2 py-4 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
+              <GraduationCap className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-display font-bold text-xl tracking-tight text-gradient">EduPlay</span>
           </div>
-          <span className="font-display font-bold text-xl tracking-tight text-gradient">EduPlay</span>
+          <ThemeToggle />
         </div>
 
-        <nav className="flex-1">
+        <nav className="flex-1 overflow-y-auto">
           <NavLinks />
         </nav>
 
         {user && (
           <div className="mt-auto pt-4 border-t border-border/50">
             <div className="flex items-center gap-3 px-2 py-3 mb-2 rounded-xl bg-secondary/50">
-              <Avatar className="w-9 h-9 border border-border">
+              <Avatar className="w-9 h-9 border border-border shrink-0">
                 <AvatarFallback className="bg-primary/20 text-primary font-semibold">
                   {user.name.charAt(0).toUpperCase()}
                 </AvatarFallback>
@@ -106,44 +112,46 @@ export function Layout({ children }: LayoutProps) {
           </div>
           <span className="font-display font-bold text-lg tracking-tight text-gradient">EduPlay</span>
         </div>
-
-        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Menu className="w-6 h-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[280px] bg-card border-border flex flex-col p-6">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-display font-bold text-xl tracking-tight text-gradient">EduPlay</span>
-            </div>
-            <nav className="flex-1">
-              <NavLinks />
-            </nav>
-            {user && (
-              <div className="mt-auto pt-4 border-t border-border/50">
-                <div className="flex items-center gap-3 py-3 mb-2">
-                  <Avatar className="w-10 h-10 border border-border">
-                    <AvatarFallback className="bg-primary/20 text-primary font-semibold">
-                      {user.name.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-semibold">{user.name}</span>
-                    <span className="text-xs text-muted-foreground">{user.email}</span>
-                  </div>
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="w-6 h-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[280px] bg-card border-border flex flex-col p-6">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-white" />
                 </div>
-                <Button variant="destructive" className="w-full" onClick={handleLogout}>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sair
-                </Button>
+                <span className="font-display font-bold text-xl tracking-tight text-gradient">EduPlay</span>
               </div>
-            )}
-          </SheetContent>
-        </Sheet>
+              <nav className="flex-1">
+                <NavLinks />
+              </nav>
+              {user && (
+                <div className="mt-auto pt-4 border-t border-border/50">
+                  <div className="flex items-center gap-3 py-3 mb-2">
+                    <Avatar className="w-10 h-10 border border-border">
+                      <AvatarFallback className="bg-primary/20 text-primary font-semibold">
+                        {user.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold">{user.name}</span>
+                      <span className="text-xs text-muted-foreground">{user.email}</span>
+                    </div>
+                  </div>
+                  <Button variant="destructive" className="w-full" onClick={handleLogout}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sair
+                  </Button>
+                </div>
+              )}
+            </SheetContent>
+          </Sheet>
+        </div>
       </header>
 
       {/* Conteúdo Principal */}

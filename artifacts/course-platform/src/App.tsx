@@ -11,11 +11,12 @@ import { MyCoursesPage } from "./pages/my-courses-page";
 import { CoursePlayerPage } from "./pages/course-player-page";
 import { AdminDashboard } from "./pages/admin-dashboard";
 import { AdminCourseEdit } from "./pages/admin-course-edit";
+import { AdminUsersPage } from "./pages/admin-users-page";
 import { CertificatePage } from "./pages/certificate-page";
+import { ThemeProvider } from "./contexts/theme-context";
 import NotFound from "@/pages/not-found";
 import { Loader2 } from "lucide-react";
 
-// Initialize API client token handling
 setupApiClient();
 
 const queryClient = new QueryClient({
@@ -53,8 +54,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/auth" component={AuthPage} />
-      
-      {/* Student Routes */}
+
+      {/* Rotas do Estudante */}
       <Route path="/">
         {(params) => <ProtectedRoute component={CatalogPage} {...params} />}
       </Route>
@@ -68,12 +69,15 @@ function Router() {
         {(params) => <ProtectedRoute component={CertificatePage} {...params} />}
       </Route>
 
-      {/* Admin Routes */}
+      {/* Rotas do Admin */}
       <Route path="/admin">
         {(params) => <ProtectedRoute component={AdminDashboard} adminOnly {...params} />}
       </Route>
       <Route path="/admin/course/:id">
         {(params) => <ProtectedRoute component={AdminCourseEdit} adminOnly {...params} />}
+      </Route>
+      <Route path="/admin/users">
+        {(params) => <ProtectedRoute component={AdminUsersPage} adminOnly {...params} />}
       </Route>
 
       <Route>
@@ -87,14 +91,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
