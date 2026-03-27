@@ -1,0 +1,25 @@
+packages:
+  "framer-motion": "For premium page transitions and staggered list animations"
+  "@hookform/resolvers": "For Zod form validation"
+  "react-hook-form": "For robust form state management"
+  "date-fns": "For formatting dates on certificates and dashboards"
+  "zod": "For defining form validation schemas"
+  "clsx": "For conditional class names"
+  "tailwind-merge": "For merging tailwind classes"
+  "lucide-react": "For beautiful icons"
+
+images:
+  - path: "artifacts/course-platform/public/images/auth-bg.png"
+    description: "Abstract dark premium background with deep indigo and violet light leaks, modern tech feel, very subtle"
+    aspect_ratio: "16:9"
+  - path: "artifacts/course-platform/public/images/logo-mark.png"
+    description: "Minimalist glowing geometric logo for an online learning platform, bright indigo on transparent background"
+    aspect_ratio: "1:1"
+  - path: "artifacts/course-platform/public/images/cert-bg.png"
+    description: "Elegant certificate border and background pattern, premium academic feel, gold and dark blue subtle accents"
+    aspect_ratio: "4:3"
+
+notes:
+  - using @workspace/api-client-react for generated TanStack Query hooks
+  - expecting token auth to use localStorage item 'token'
+  - standard shadcn UI components are assumed to be available in @/components/ui/
