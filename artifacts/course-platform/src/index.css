@@ -44,39 +44,72 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* ── Light Mode (default) ─────────────────────────────── */
 :root {
-  /* Premium Dark Theme by default */
+  --background: 220 20% 97%;
+  --foreground: 224 30% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 224 30% 10%;
+  --card-border: 220 14% 90%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 30% 10%;
+  --popover-border: 220 14% 90%;
+
+  --primary: 249 100% 60%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 220 14% 93%;
+  --secondary-foreground: 224 30% 15%;
+
+  --muted: 220 14% 93%;
+  --muted-foreground: 220 10% 46%;
+
+  --accent: 280 80% 58%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 14% 88%;
+  --input: 220 14% 88%;
+  --ring: 249 100% 60%;
+
+  --radius: 0.75rem;
+}
+
+/* ── Dark Mode ───────────────────────────────────────── */
+.dark {
   --background: 0 0% 4%;
   --foreground: 0 0% 98%;
-  
+
   --card: 0 0% 7%;
   --card-foreground: 0 0% 98%;
   --card-border: 0 0% 12%;
-  
+
   --popover: 0 0% 7%;
   --popover-foreground: 0 0% 98%;
   --popover-border: 0 0% 12%;
-  
-  --primary: 249 100% 64%; /* Vibrant Indigo */
+
+  --primary: 249 100% 64%;
   --primary-foreground: 0 0% 100%;
-  
+
   --secondary: 0 0% 12%;
   --secondary-foreground: 0 0% 98%;
-  
+
   --muted: 0 0% 12%;
   --muted-foreground: 0 0% 64%;
-  
+
   --accent: 280 80% 60%;
   --accent-foreground: 0 0% 98%;
-  
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
-  
+
   --border: 0 0% 15%;
   --input: 0 0% 15%;
   --ring: 249 100% 64%;
-  
-  --radius: 0.75rem;
 }
 
 @layer base {
@@ -98,11 +131,11 @@
   .glass-panel {
     @apply bg-card/60 backdrop-blur-xl border border-white/5 shadow-2xl shadow-black/50;
   }
-  
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
