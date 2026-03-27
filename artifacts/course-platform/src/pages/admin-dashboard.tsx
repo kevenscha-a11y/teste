@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useGetAdminCourses, useCreateCourse, getGetAdminCoursesQueryKey } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Plus, LayoutDashboard, Users, BookOpen, Settings, Loader2 } from "lucide-react";
+import { Plus, LayoutDashboard, Users, BookOpen, Settings, Loader2, PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
